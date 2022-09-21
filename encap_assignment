@@ -1,0 +1,100 @@
+# The house has gas, electricity, and water. All three of these things are space, and space share some things in common.
+# # For example, they can all be considered “on” or “off”, but yet they all have a different unit that they are measured in. 
+# # Let us see how we can create a parent class, Amenity, and extend its functionality to three children classes, Gas, Electricity, and Water.
+
+# The parent class
+class Space:
+  def __init__(self, is_running):
+    self.is_running = is_running
+  def set_is_running(self, currently_running):
+      self.is_running = currently_running
+      print(f"{self} is running: {self.is_running}")
+# Children classes. We first use the __init__ method to add properties to the class, and the super().__init__ method to inherit all of the parents class functionality
+class Air(Space):
+  def __init__(self, is_running, cubic_feet):
+    self.cubic_feet = cubic_feet
+    super().__init__(is_running)
+def __str__(self):
+    return f"<{self.__class__.__name__}: {self.cubic_feet}/cuft of gas>"
+class Electricity(Space):
+  def __init__(self, is_running, watts):
+    self.watts = watts
+    super().__init__(is_running)
+  
+  def __str__(self):
+    return f"<{self.__class__.__name__}: {self.watts}/watts of electricity>"
+class Water(Space):
+  def __init__(self, is_running, gallons):
+    self.gallons = gallons
+    super().__init__(is_running)
+def __str__(self):
+      return f"<{self.__class__.__name__}: {self.gallons}/gallons of water>"
+# Driver Code
+g = Air(False, 236)
+e = Electricity(False, 104.2)
+w = Water(True, 16)
+g.set_is_running(True)
+g.set_is_running(False)
+e.set_is_running(True)
+e.set_is_running(False)
+w.set_is_running(True)
+w.set_is_running(False)
+
+# Abstraction in Python is the process of hiding the real implementation of an application from the user 
+# and emphasizing only how to use the application. 
+# Let’s look at examples of abstract classes in Python:
+
+# We import ABC and abstractmethod from the abc module
+from abc import ABC, abstractmethod
+# Amenity becomes our abstract base class (ABC)
+class Space(ABC):
+    def turn_on(self):
+        pass
+# We extend our ABC to three new child classes
+class Electricity(Space):
+    def turn_on(self):
+        print("You flipped the light switch!")
+class Water(Space):
+    def turn_on(self):
+        print("You pressed the faucet up!")
+class Air(Space):
+    def turn_on(self):
+        print("You turned the knob on the stovefront!")
+# Driver code
+W = Electricity()
+W.turn_on()
+E = Water()
+E.turn_on()
+G = Air()
+G.turn_on()
+
+# Polymorphism
+# The word polymorphism means having many forms. In programming, polymorphism means the same function name is used for different types. 
+# When we previously used inheritance, we explicitly linked parent classes to child classes to write reusable code. 
+# Polymorphism is achieving the same outcome of shared properties and methods but there is no link between the code; 
+# instead, we write the properties and methods to operate in similar 
+# and logical ways, allowing us to freely swap classes and methods and being able to expect a similar output.
+
+# Define two classes that have similar implementation and therefore can be mixed and matched in an iteration.
+class Air:
+    def __init__(self, price, unit):
+        self.price = price
+        self.unit = unit
+    def info(self):
+      print(f"I am gas. My price is {self.price}, measured in {self.unit}.")
+    def make_sound(self):
+      print(f"psssssssssssssss")
+class Water:
+    def __init__(self, price, unit):
+        self.price = price
+        self.unit = unit
+    def info(self):
+      print(f"I am water. My price is {self.price}, measured in {self.unit}.")
+    def make_sound(self):
+      print("whooooooosh")
+# Driver Code
+g = Air(0.89, 'cu/ft')
+w = Water(0.79, 'gallons')
+for space in (g, w):
+    space.make_sound()
+    space.info()
